@@ -10,6 +10,38 @@ API de autenticacion y gestion de tareas con Express, TypeScript y PostgreSQL.
 
 El servidor se reinicia automaticamente cuando guardas cambios en el codigo. Para detenerlo, presiona `Ctrl+C`.
 
+## Configurar el archivo .env
+
+Desde la raiz del proyecto, copia la plantilla en PowerShell:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Si ya tienes un archivo `.env`, edita ese archivo y conserva tus valores.
+
+Abre `.env` y ajusta estas variables para tu instalacion local:
+
+| Variable | Configuracion |
+| --- | --- |
+| `PORT` | Puerto de la API, por ejemplo `3000`. |
+| `DB_HOST` | Servidor de PostgreSQL; usa `localhost` si esta en tu equipo. |
+| `DB_PORT` | Puerto de PostgreSQL, normalmente `5432`. |
+| `DB_USER` | Usuario de PostgreSQL con acceso a la base de datos. |
+| `DB_PASSWORD` | Contrasena de ese usuario de PostgreSQL. |
+| `DB_NAME` | Nombre de la base de datos que hayas creado, por ejemplo `task_management`. |
+| `JWT_SECRET` | Clave secreta larga y aleatoria para firmar los tokens; reemplaza `yourjwtsecret`. |
+
+Puedes generar una clave para `JWT_SECRET` con este comando y copiar el resultado al archivo:
+
+```bash
+node -e "console.log(require('node:crypto').randomBytes(32).toString('hex'))"
+```
+
+La base de datos debe existir y tener las tablas del archivo `database/database.sql`. Inicia la API con `npm run dev` y reiniciala cuando cambies `.env` para cargar los nuevos valores.
+
+El archivo `.env` contiene secretos y esta excluido de Git mediante `.gitignore`. Comparte solamente `.env.example`, sin credenciales reales.
+
 ## Swagger
 
 Abre [Swagger UI](http://localhost:3000/api-docs/) con la API en ejecucion. Si cambias `PORT`, utiliza ese puerto.
