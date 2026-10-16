@@ -1,3 +1,4 @@
+import type { AuthenticatedUser } from "../../types/auth";
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { config } from "../../config/env";
@@ -22,7 +23,16 @@ export function authMiddleware(req: Request, res: Response, next: NextFunction) 
     }
     try {
         const decoded = jwt.verify(token, config.jwtSecret);
-        (req as any).user = decoded;
+        if (
+            typeof decoded === "string" ||
+            typeof decoded.id !== "number" ||
+            !Number.isInteger(decoded.id) ||
+            typeof decoded.email !== "string"
+        ) {
+            return res.status(401).json({ error: "Invalid or expired token" });
+        }
+        const user: AuthenticatedUser = { id: decoded.id, email: decoded.email };
+        req.user = user;
         next();
     } catch (error) {
         return res.status(401).json({ error: "Invalid or expired token" });

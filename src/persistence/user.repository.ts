@@ -7,7 +7,7 @@ import pool from "./database";
  * @returns Fila encontrada o undefined si no existe una coincidencia.
  */
 export async function findUserByEmail(email: string) {
-    var result = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+    const result = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
     return result.rows[0];
 }
 
