@@ -1,5 +1,12 @@
 import { Request, Response, NextFunction } from "express";
 
+/**
+ * Valida correo y contrasena; responde 400 si los datos no son validos.
+ * @param req - Peticion entrante; las tareas requieren autenticacion previa.
+ * @param res - Respuesta HTTP.
+ * @param next - Continua la cadena o delega el error al middleware central.
+ * @returns Respuesta de error o undefined al continuar la peticion.
+ */
 export function validateLogin(req: Request, res: Response, next: NextFunction) {
     const { email, password } = req.body;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

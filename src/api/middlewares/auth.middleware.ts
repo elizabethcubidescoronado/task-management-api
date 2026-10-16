@@ -2,6 +2,13 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { config } from "../../config/env";
 
+/**
+ * Verifica el JWT Bearer, asigna la identidad a la peticion o responde 401.
+ * @param req - Peticion entrante; las tareas requieren autenticacion previa.
+ * @param res - Respuesta HTTP.
+ * @param next - Continua la cadena o delega el error al middleware central.
+ * @returns Respuesta de error o undefined al continuar la peticion.
+ */
 export function authMiddleware(req: Request, res: Response, next: NextFunction) {
     const authHeader = req.headers.authorization;
     if (!authHeader) {

@@ -1,5 +1,12 @@
 import { Request, Response, NextFunction } from "express";
 
+/**
+ * Valida nombre, correo y contrasena de al menos ocho caracteres.
+ * @param req - Peticion entrante; las tareas requieren autenticacion previa.
+ * @param res - Respuesta HTTP.
+ * @param next - Continua la cadena o delega el error al middleware central.
+ * @returns Respuesta de error o undefined al continuar la peticion.
+ */
 export function validateRegister(req: Request, res: Response, next: NextFunction) {
     const { name, email, password } = req.body;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
