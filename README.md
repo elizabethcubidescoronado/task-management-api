@@ -6,7 +6,9 @@ API de autenticacion y gestion de tareas con Express, TypeScript y PostgreSQL.
 
 1. Instala las dependencias: `npm install`.
 2. Configura `.env` siguiendo `.env.example` y prepara PostgreSQL con los archivos de `database/`.
-3. Inicia el servidor: `npx tsx src/server.ts`.
+3. Inicia el servidor en desarrollo: `npm run dev`.
+
+El servidor se reinicia automaticamente cuando guardas cambios en el codigo. Para detenerlo, presiona `Ctrl+C`.
 
 ## Swagger
 
